@@ -13,7 +13,7 @@ router.get("/:id", async (c) => {
       return c.json({ error: "Widget not found" }, 404);
     }
 
-    return c.json(data);
+    return c.json(data, 200);
   } catch (error) {
     return c.json({ error: "Failed to load widget data" }, 500);
   }
@@ -26,7 +26,7 @@ router.put("/:id", async (c) => {
     const body = await c.req.json();
 
     // TODO: Implement widget update logic
-    return c.json({ message: "Widget updated successfully" });
+    return c.json({ message: "Widget updated successfully" }, 200);
   } catch (error) {
     return c.json({ error: "Failed to update widget" }, 500);
   }

@@ -7,7 +7,7 @@ const router = new Hono();
 router.get("/", async (c) => {
   try {
     const config = await loadConfig();
-    return c.json(config.pages);
+    return c.json(config.pages, 200);
   } catch (error) {
     return c.json({ error: "Failed to load pages" }, 500);
   }
@@ -24,7 +24,7 @@ router.get("/:slug", async (c) => {
       return c.json({ error: "Page not found" }, 404);
     }
 
-    return c.json(page);
+    return c.json(page, 200);
   } catch (error) {
     return c.json({ error: "Failed to load page" }, 500);
   }

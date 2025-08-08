@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/nursery/useUniqueElementIds: <explanation> */
+/** biome-ignore-all lint/security/noDangerouslySetInnerHtml: <explanation> */
 import type { HSLColor, ThemeConfig } from "@glance/shared";
 import { cache } from "react";
 import { hslString } from "@/lib/utils";
@@ -16,10 +18,10 @@ export const generateMetadata = () => ({
 
 const loadPageData = cache(async () => {
   try {
-    const pagesRes = await fetch(`${env.NEXT_PUBLIC_SERVER_URL}/api/pages`);
-    const configRes = await fetch(`${env.NEXT_PUBLIC_SERVER_URL}/api/config`);
+    const pagesRes = await fetch(`${env.NEXT_PUBLIC_SERVER_URL}/pages`);
+    const configRes = await fetch(`${env.NEXT_PUBLIC_SERVER_URL}/config`);
     if (!(pagesRes.ok && configRes.ok)) {
-      throw new Error("Failed to load page data");
+      throw new Error("Failed to load pages and config data");
     }
     const pages = await pagesRes.json();
     const config = await configRes.json();
@@ -58,7 +60,6 @@ export default async function RootLayout({
         <link href="/js/page.js" key="page.js" rel="prefetch" />
 
         <style
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
           dangerouslySetInnerHTML={{
             __html: getRootCss(config.theme),
           }}
@@ -68,7 +69,7 @@ export default async function RootLayout({
 
         {/* document-head-after */}
         <link href="/css/login.css" key="login.css" rel="stylesheet" />
-        <script key="login.js" src="/js/login.js" type="module" />
+        <script key="login.js" src="/js/login.js" type="module" defer />
       </head>
       <body className="">
         <div className="body-content flex flex-column" id="root">

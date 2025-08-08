@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { WidgetData } from '@glance/shared';
+import type { WidgetData } from "@glance/shared";
+import { useEffect, useState } from "react";
+import { env } from "@/env";
 
 export function useWidgetData(widgetId: number) {
   const [data, setData] = useState<WidgetData | null>(null);
@@ -10,16 +11,18 @@ export function useWidgetData(widgetId: number) {
     async function fetchWidgetData() {
       try {
         setLoading(true);
-        const response = await fetch(`/api/widgets/${widgetId}`);
-        
+        const response = await fetch(
+          `${env.NEXT_PUBLIC_SERVER_URL}/widgets/${widgetId}`
+        );
+
         if (!response.ok) {
-          throw new Error('Failed to fetch widget data');
+          throw new Error("Failed to fetch widget data");
         }
-        
+
         const widgetData = await response.json();
         setData(widgetData);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
+        setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
         setLoading(false);
       }
@@ -29,4 +32,4 @@ export function useWidgetData(widgetId: number) {
   }, [widgetId]);
 
   return { data, loading, error };
-} 
+}

@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import type { GlanceConfig } from "@glance/shared";
 import yaml from "js-yaml";
 
@@ -11,8 +11,9 @@ export function loadConfig(): GlanceConfig {
   }
 
   try {
-    const configPath =
-      process.env.CONFIG_PATH || join(process.cwd(), "config", "glance.yml");
+    const configPath = process.env.CONFIG_PATH
+      ? resolve(process.env.CONFIG_PATH)
+      : join(process.cwd(), "config", "glance.yml");
     const configFile = readFileSync(configPath, "utf8");
 
     // Parse YAML and handle environment variables

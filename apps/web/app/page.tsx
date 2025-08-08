@@ -13,9 +13,9 @@ export default function HomePage() {
   useEffect(() => {
     async function loadPageData() {
       try {
-        const response = await fetch(`${env.NEXT_PUBLIC_SERVER_URL}/api/pages`);
+        const response = await fetch(`${env.NEXT_PUBLIC_SERVER_URL}/pages`);
         if (!response.ok) {
-          throw new Error("Failed to load page data");
+          throw new Error("Failed to load pages data");
         }
         const data = await response.json();
         setPageData(data);

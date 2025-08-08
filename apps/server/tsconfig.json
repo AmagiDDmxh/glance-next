@@ -9,7 +9,6 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "moduleResolution": "NodeNext",
-    "allowImportingTsExtensions": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,

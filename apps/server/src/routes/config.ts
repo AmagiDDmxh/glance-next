@@ -7,7 +7,7 @@ const router = new Hono();
 router.get("/", async (c) => {
   try {
     const config = await loadConfig();
-    return c.json(config);
+    return c.json(config, 200);
   } catch (error) {
     return c.json({ error: "Failed to load configuration" }, 500);
   }
@@ -17,7 +17,7 @@ router.get("/", async (c) => {
 router.get("/theme", async (c) => {
   try {
     const config = await loadConfig();
-    return c.json(config.theme);
+    return c.json(config.theme, 200);
   } catch (error) {
     return c.json({ error: "Failed to load theme configuration" }, 500);
   }
@@ -27,7 +27,7 @@ router.get("/theme", async (c) => {
 router.get("/branding", async (c) => {
   try {
     const config = await loadConfig();
-    return c.json(config.branding);
+    return c.json(config.branding, 200);
   } catch (error) {
     return c.json({ error: "Failed to load branding configuration" }, 500);
   }

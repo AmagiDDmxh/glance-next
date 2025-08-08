@@ -16,7 +16,7 @@ const app = new Hono();
 // Middleware
 app.use(logger());
 app.use(cors());
-app.use(csrf());
+// app.use(csrf());
 app.use(prettyJSON());
 app.use(secureHeaders());
 app.use(trimTrailingSlash());
@@ -29,10 +29,10 @@ app.get("/health", (c) =>
 );
 
 // API routes
-app.route("/api/config", configRouter);
-app.route("/api/pages", pagesRouter);
-app.route("/api/widgets", widgetsRouter);
-app.route("/api/auth", authRouter);
+app.route("/config", configRouter);
+app.route("/pages", pagesRouter);
+app.route("/widgets", widgetsRouter);
+app.route("/auth", authRouter);
 
 // Serve static assets
 app.use("/assets/*", async (c) => {
