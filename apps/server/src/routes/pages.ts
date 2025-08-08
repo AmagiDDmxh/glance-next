@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { loadConfig } from "../services/config";
+import { loadConfig } from "../services/config.js";
 
 const router = new Hono();
 

@@ -1,8 +1,8 @@
 import type { WidgetData } from "@glance/shared";
-import { MarketsWidgetHandler } from "../widgets/markets";
-import { RedditWidgetHandler } from "../widgets/reddit";
-import { RSSWidgetHandler } from "../widgets/rss";
-import { WeatherWidgetHandler } from "../widgets/weather";
+import { MarketsWidgetHandler } from "../widgets/markets.js";
+import { RedditWidgetHandler } from "../widgets/reddit.js";
+import { RSSWidgetHandler } from "../widgets/rss.js";
+import { WeatherWidgetHandler } from "../widgets/weather.js";
 
 const widgetHandlers = {
   rss: new RSSWidgetHandler(),

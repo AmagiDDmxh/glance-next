@@ -1,10 +1,15 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "lib": ["ESNext"],
     "target": "ESNext",
-    "module": "ESNext",
-    "lib": ["esnext"],
-    "moduleResolution": "bundler",
+    "module": "NodeNext",
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
