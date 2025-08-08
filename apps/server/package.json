@@ -13,14 +13,15 @@
   },
   "dependencies": {
     "@glance/shared": "workspace:*",
-    "hono": "^4.8.0",
     "@hono/node-server": "^1.8.0",
-    "js-yaml": "^4.1.0",
-    "node-cron": "^3.0.0",
     "axios": "^1.6.0",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.0",
+    "hono": "^4.8.0",
+    "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.0",
-    "dotenv": "^16.3.0"
+    "node-cron": "^3.0.0",
+    "rss-parser": "^3.13.0"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.0",
