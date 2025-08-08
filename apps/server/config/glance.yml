@@ -1,0 +1,118 @@
+server:
+  host: "0.0.0.0"
+  # port: 3001
+  proxied: false
+  # assets-path: "/assets"
+  # base-url: ""
+
+auth:
+  # For demo
+  secret-key: "9s3c60UA31IrTrpYXOKf5cCEdM4lmulOfQTK0P/6U7VV7duuzBf/BPWnNjuKvtsT/E2ktVHvIS8fmaHQa/qROA=="
+  users:
+    admin:
+      # 6 digit length required
+      password: "adminx"
+
+document:
+  head: ""
+
+theme:
+  light: true
+  background-color: 0 0 95
+  primary-color: 0 0 10
+  negative-color: 0 90 50
+  contrast-multiplier: 1.3
+  text-saturation-multiplier: 1.0
+  custom-css-file: ""
+  disable-picker: false
+  presets: {}
+
+branding:
+  hide-footer: false
+  custom-footer: ""
+  # logo-text: "Glance"
+  # logo-url: ""
+  favicon-url: ""
+  app-name: "Glance"
+  app-icon-url: ""
+  app-background-color: ""
+
+pages:
+  - name: "Home"
+    slug: ""
+    width: "default"
+    desktop-navigation-width: "default"
+    show-mobile-header: true
+    hide-desktop-navigation: false
+    center-vertically: false
+    head-widgets: []
+    columns:
+      - size: small
+        widgets:
+          - type: calendar
+
+          - type: rss
+            limit: 10
+            collapse-after: 3
+            cache: 3h
+            style: detailed-list
+            feeds:
+              - url: https://ciechanow.ski/atom.xml
+              - url: https://www.joshwcomeau.com/rss.xml
+                title: Josh Comeau
+              - url: https://samwho.dev/rss.xml
+              - url: https://awesomekling.github.io/feed.xml
+              - url: https://ishadeed.com/feed.xml
+                title: Ahmad Shadeed
+
+      - size: full
+        widgets:
+          - type: hacker-news
+
+          - type: videos
+            channels:
+              - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
+              - UCv6J_jJa8GJqFwQNgNrMuww # ServeTheHome
+              - UCOk-gHyjcWZNj3Br4oxwh0A # Techno Tim
+              - UC5--wS0Ljbin1TjWQX6eafA # bigboxSWE
+              - UCoeUvZfZu-qn7dfrwD4NCtw # Steven Gong, make anything in code
+
+          - type: reddit
+            subreddit: selfhosted
+
+      - size: small
+        widgets:
+          - type: weather
+            location: Guangzhou, China
+            place:
+              name: "Guangzhou"
+              area: "Guangzhou"
+              latitude: 23.128994
+              longitude: 113.253250
+              timezone: "Asia/Shanghai"
+              country: "China"
+
+          - type: stocks
+            stocks:
+              - symbol: SPY
+                name: S&P 500
+              - symbol: BTC-USD
+                name: Bitcoin
+              - symbol: ETH-USD
+                name: Ethereum
+              - symbol: SOL-USD
+                name: Solana
+              - symbol: MSTR
+                name:
+              - symbol: NVDA
+                name: NVIDIA
+              - symbol: AAPL
+                name: Apple
+              - symbol: MSFT
+                name: Microsoft
+              - symbol: GOOGL
+                name: Google
+              - symbol: AMD
+                name: AMD
+              - symbol: RDDT
+                name: Reddit
