@@ -48,11 +48,13 @@ export interface ThemeConfig {
   key?: string;
 }
 
-export interface HSLColor {
-  h: number;
-  s: number;
-  l: number;
-}
+export type HSLColor =
+  | string
+  | {
+      h: number;
+      s: number;
+      l: number;
+    };
 
 export interface ThemeProperties {
   light?: boolean;
@@ -133,6 +135,14 @@ export interface RedditWidget extends Widget {
 export interface WeatherWidget extends Widget {
   type: "weather";
   location: string;
+  place?: {
+    name: string;
+    area: string;
+    latitude: number;
+    longitude: number;
+    timezone: string;
+    country: string;
+  };
   units?: "metric" | "imperial";
   hourFormat?: "12h" | "24h";
   showAreaName?: boolean;

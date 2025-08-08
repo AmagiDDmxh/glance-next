@@ -1,3 +1,5 @@
+import type { WeatherWidget } from "@glance/shared";
+
 // Weather data types
 export interface WeatherData {
   temperature: number;
@@ -151,7 +153,7 @@ export async function fetchOpenMeteoPlaceFromName(
 
 export async function fetchWeatherForOpenMeteoPlace(
   place: OpenMeteoPlace,
-  units: string
+  units: "imperial" | "metric" = "metric"
 ): Promise<WeatherData> {
   const temperatureUnit = units === "imperial" ? "fahrenheit" : "celsius";
 
@@ -177,7 +179,7 @@ export async function fetchWeatherForOpenMeteoPlace(
   const responseJson: OpenMeteoWeatherResponse = await response.json();
 
   const now = new Date();
-  const currentBar = Math.floor(now.getHours() / 2);
+  const currentBar = Math.floor(now.getHours() / 2 - 1);
 
   const sunriseTime = new Date(responseJson.daily.sunrise[0] * 1000);
   const sunsetTime = new Date(responseJson.daily.sunset[0] * 1000);
@@ -238,12 +240,12 @@ export async function fetchWeatherForOpenMeteoPlace(
 
 // Main weather fetching function
 export async function fetchWeatherData(
-  location: string,
-  units = "metric"
+  widget: WeatherWidget
 ): Promise<{ weather: WeatherData; place: OpenMeteoPlace }> {
   try {
-    const place = await fetchOpenMeteoPlaceFromName(location);
-    const weather = await fetchWeatherForOpenMeteoPlace(place, units);
+    const place =
+      widget.place ?? (await fetchOpenMeteoPlaceFromName(widget.location));
+    const weather = await fetchWeatherForOpenMeteoPlace(place, widget.units);
     return { weather, place };
   } catch (error) {
     throw new Error(`Failed to fetch weather data: ${error}`);

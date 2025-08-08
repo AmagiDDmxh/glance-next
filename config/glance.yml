@@ -1,33 +1,26 @@
 server:
   host: "0.0.0.0"
-  port: 3001
+  # port: 3001
   proxied: false
-  assets-path: "/assets"
-  base-url: ""
+  # assets-path: "/assets"
+  # base-url: ""
 
 auth:
-  secret-key: "your-secret-key-here"
+  # For demo
+  secret-key: "9s3c60UA31IrTrpYXOKf5cCEdM4lmulOfQTK0P/6U7VV7duuzBf/BPWnNjuKvtsT/E2ktVHvIS8fmaHQa/qROA=="
   users:
     admin:
-      password: "admin"
+      # 6 digit length required
+      password: "adminx"
 
 document:
   head: ""
 
 theme:
   light: true
-  background-color:
-    h: 0
-    s: 0
-    l: 95
-  primary-color:
-    h: 0
-    s: 0
-    l: 10
-  negative-color:
-    h: 0
-    s: 90
-    l: 50
+  background-color: 0 0 95
+  primary-color: 0 0 10
+  negative-color: 0 90 50
   contrast-multiplier: 1.3
   text-saturation-multiplier: 1.0
   custom-css-file: ""
@@ -91,6 +84,13 @@ pages:
         widgets:
           - type: weather
             location: Guangzhou, China
+            place:
+              name: "Guangzhou"
+              area: "Guangzhou"
+              latitude: 23.128994
+              longitude: 113.253250
+              timezone: "Asia/Shanghai"
+              country: "China"
 
           - type: stocks
             stocks:

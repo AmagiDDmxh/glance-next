@@ -1,21 +1,18 @@
-import type { ThemeConfig } from "@glance/shared";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { HSLColor, ThemeConfig } from "@glance/shared";
 import { cache } from "react";
-
 import { hslString } from "@/lib/utils";
 import { NavigationHeader } from "../components/ui/common/NavigationHeader";
 import { env } from "../env";
 
 import "../css/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
+export const generateMetadata = () => ({
   title: "Glance Dashboard",
   description:
     "A modern dashboard for monitoring and displaying various data sources",
-};
+});
 
 const loadPageData = cache(async () => {
   try {
@@ -44,17 +41,36 @@ export default async function RootLayout({
   const { pages, config } = await loadPageData();
 
   return (
-    <html data-scheme={config.theme.light ? "light" : "dark"} lang="en">
+    <html
+      data-scheme={config.theme.light ? "light" : "dark"}
+      data-theme={config.theme.key}
+      id="top"
+      lang="en"
+    >
       <head>
+        {/* document-head-before */}
+        <link
+          as="script"
+          href="/js/templating.js"
+          key="templating.js"
+          rel="preload"
+        />
+        <link href="/js/page.js" key="page.js" rel="prefetch" />
+
         <style
           // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
           dangerouslySetInnerHTML={{
             __html: getRootCss(config.theme),
           }}
           id="theme-style"
+          key="theme-style"
         />
+
+        {/* document-head-after */}
+        <link href="/css/login.css" key="login.css" rel="stylesheet" />
+        <script key="login.js" src="/js/login.js" type="module" />
       </head>
-      <body className={inter.className}>
+      <body className="">
         <div className="body-content flex flex-column" id="root">
           <NavigationHeader config={config} pages={pages} />
           {children}
@@ -64,12 +80,31 @@ export default async function RootLayout({
   );
 }
 
+function parseHSL(val?: HSLColor) {
+  if (typeof val === "string") {
+    try {
+      const [, h = 0, s = 0, l = 95] = val.match(/(\d+)\s(\d+)\s(\d+)/) ?? [];
+      return { h, s, l };
+    } catch {
+      return { h: 0, s: 0, l: 95 };
+    }
+  }
+
+  if (val?.h) {
+    return val;
+  }
+
+  return { h: 0, s: 0, l: 95 };
+}
+
 function getRootCss(vars: ThemeConfig) {
+  const { h, s, l } = parseHSL(vars.backgroundColor);
+
   return `
 :root {
-  ${vars.backgroundColor ? `--bgh: ${vars.backgroundColor.h};` : ""}
-  ${vars.backgroundColor ? `--bgs: ${vars.backgroundColor.s}%;` : ""}
-  ${vars.backgroundColor ? `--bgl: ${vars.backgroundColor.l}%;` : ""}
+  ${vars.backgroundColor ? `--bgh: ${h};` : ""}
+  ${vars.backgroundColor ? `--bgs: ${s}%;` : ""}
+  ${vars.backgroundColor ? `--bgl: ${l}%;` : ""}
   ${vars.contrastMultiplier !== 0 ? `--cm: ${vars.contrastMultiplier};` : ""}
   ${
     vars.textSaturationMultiplier !== 0

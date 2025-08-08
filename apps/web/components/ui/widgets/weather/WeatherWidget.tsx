@@ -56,7 +56,7 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({
   // Use SWR for data fetching if no data is provided via props
   const { data, error, isLoading } = useSWR(
     propData ? null : `weather-${widget.location}-${widget.units}`,
-    () => fetchWeatherData(widget.location, widget.units),
+    () => fetchWeatherData(widget),
     {
       refreshInterval: 300_000, // Refresh every 5 minutes
       errorRetryCount: 3,
@@ -96,8 +96,8 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({
               {/* If has precipitation */}
               {x.hasPrecipitation && <div className="weather-column-rain" />}
               {/* If in daylight, sunrise, sunset */}
-              {idx > weatherData.sunriseColumn &&
-                idx < weatherData.sunsetColumn && (
+              {idx >= weatherData.sunriseColumn &&
+                idx <= weatherData.sunsetColumn && (
                   <div
                     className={cn(
                       "weather-column-daylight",

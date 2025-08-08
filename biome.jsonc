@@ -1,6 +1,15 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
-  "extends": [
-    "ultracite"
-  ]
+  "extends": ["ultracite"],
+  "files": {
+    "experimentalScannerIgnores": [
+      "__registry__",
+      ".vscode",
+      "migrations",
+      ".next",
+      ".wrangler",
+      ".open-next",
+      "apps/web/js"
+    ]
+  }
 }

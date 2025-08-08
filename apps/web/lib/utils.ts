@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function hslString(hsl?: HSLColor | string) {
   if (typeof hsl === "string") {
-    return hsl;
+    return `hsl(${hsl})`;
   }
 
   if (!hsl) {

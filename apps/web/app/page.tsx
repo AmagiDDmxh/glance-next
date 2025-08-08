@@ -2,7 +2,7 @@
 
 import type { PageData } from "@glance/shared";
 import { useEffect, useState } from "react";
-import { Page } from "../components/ui";
+import { LoadingSpinner, Page } from "../components/ui";
 import { env } from "../env";
 
 export default function HomePage() {
@@ -32,9 +32,7 @@ export default function HomePage() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="loading-spinner">
-          <div className="spinner" />
-        </div>
+        <LoadingSpinner />
       </div>
     );
   }

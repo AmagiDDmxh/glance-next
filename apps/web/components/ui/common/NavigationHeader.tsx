@@ -14,7 +14,13 @@ export function NavigationHeader({
   config: GlanceConfig;
 }) {
   const path = usePathname();
-  const current = pages?.find((x) => x.slug === path);
+  const current = pages?.find((x) => {
+    if (x.slug === "home" || x.slug === "") {
+      return path === "" || path === "/";
+    }
+
+    return x.slug === path;
+  });
 
   if (!pages) {
     return null;
@@ -67,7 +73,7 @@ export function NavigationHeader({
             <Link
               aria-current={path === page.slug ? "page" : undefined}
               className={`nav-item ${
-                path === page.slug ? "nav-item-current" : ""
+                current === page ? "nav-item-current" : ""
               }`}
               href={`/${page.slug}`}
               key={page.slug}

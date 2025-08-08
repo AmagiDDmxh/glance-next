@@ -16,7 +16,6 @@ export const Page: React.FC<PageProps> = ({ page }) => {
         id="page"
       >
         <h1 className="visually-hidden">{page.title ?? page.slug}</h1>
-
         <div className="page-content">
           {/* Head widgets */}
           {page.headWidgets.length > 0 && (

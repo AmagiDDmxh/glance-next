@@ -27,6 +27,7 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = ({
       {widget.notice && <NoticeMessage message={widget.notice} />}
       {widget.error && <ErrorMessage message={widget.error} />}
       {error && <ErrorMessage message={error} />}
+
       {loading ? (
         <LoadingSpinner />
       ) : (
